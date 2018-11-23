@@ -5,6 +5,8 @@
 
 
 """
+TS algorithm
+
 k = 1
 s = initial solution
 WHILE the stopping condition is not met DO 
@@ -18,6 +20,29 @@ WHILE the stopping condition is not met DO
     k = k + 1
 END WHILE
 """
+
+
+# In[4]:
+
+
+import numpy as np
+import pandas as pd
+
+
+# In[5]:
+
+
+# 讀取資料
+def readData():
+  data = pd.read_csv("data.csv")
+  return data
+
+
+# In[23]:
+
+
+data=readData()
+print(data.ix[:,"Jobs"])
 
 
 # In[ ]:
