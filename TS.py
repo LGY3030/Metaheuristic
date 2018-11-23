@@ -22,14 +22,15 @@ END WHILE
 """
 
 
-# In[4]:
+# In[22]:
 
 
 import numpy as np
 import pandas as pd
+import random
 
 
-# In[5]:
+# In[10]:
 
 
 # 讀取資料
@@ -38,11 +39,46 @@ def readData():
   return data
 
 
-# In[23]:
+# In[14]:
 
 
 data=readData()
-print(data.ix[:,"Jobs"])
+print(data.loc[:,"Jobs"].size)
+
+
+# In[66]:
+
+
+def get(a):
+    total=0
+    b=0
+    #for i in range(len(a)):
+    b=a[i]
+    total+=data.loc[b,"Weights"]*(np.max(data.loc[b,"Process Time"]-data.loc[b,"Due Date"],0))
+
+
+# In[60]:
+
+
+solution=0
+q= [x for x in range(1,data.loc[:,"Jobs"].size+1)]
+random.shuffle(q)
+t=q[:]
+print(t)
+for i in range(5):
+    print(i)
+
+
+# In[61]:
+
+
+for i in range(data.loc[:,"Jobs"].size-1):
+    tmp=t[i]
+    t[i]=t[i+1]
+    t[i+1]=tmp
+    b[i]=t[:]
+    t=q[:]
+    print(b[i])
 
 
 # In[ ]:
