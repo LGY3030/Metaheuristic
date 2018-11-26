@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[7]:
 
 
 """
@@ -22,7 +22,7 @@ END WHILE
 """
 
 
-# In[22]:
+# In[8]:
 
 
 import numpy as np
@@ -30,7 +30,7 @@ import pandas as pd
 import random
 
 
-# In[10]:
+# In[9]:
 
 
 # 讀取資料
@@ -39,25 +39,26 @@ def readData():
   return data
 
 
-# In[14]:
+# In[10]:
 
 
 data=readData()
 print(data.loc[:,"Jobs"].size)
 
 
-# In[66]:
+# In[32]:
 
 
 def get(a):
     total=0
     b=0
-    #for i in range(len(a)):
-    b=a[i]
-    total+=data.loc[b,"Weights"]*(np.max(data.loc[b,"Process Time"]-data.loc[b,"Due Date"],0))
+    for i in a:
+        total+=data.loc[i-1,"Weights"]*(np.max(data.loc[i-1,"Process Time"]+b-data.loc[i-1,"Due Date"],0))
+        b+=data.loc[i-1,"Process Time"]
+    return total
 
 
-# In[60]:
+# In[33]:
 
 
 solution=0
@@ -65,20 +66,26 @@ q= [x for x in range(1,data.loc[:,"Jobs"].size+1)]
 random.shuffle(q)
 t=q[:]
 print(t)
-for i in range(5):
-    print(i)
 
 
-# In[61]:
+# In[34]:
 
 
-for i in range(data.loc[:,"Jobs"].size-1):
+max=100000000
+for i in range(data["Jobs"].size-1):
     tmp=t[i]
     t[i]=t[i+1]
     t[i+1]=tmp
-    b[i]=t[:]
+    total=get(t)
     t=q[:]
-    print(b[i])
+    if max>total:
+        max=total
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
